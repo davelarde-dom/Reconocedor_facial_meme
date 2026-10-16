@@ -13,13 +13,8 @@ export interface Meme {
  * lista, no muestra ningún meme.
  */
 export const CATALOGO: Partial<Record<Expresion, Meme>> = {
-  feliz: { imagen: "/memes/gato-feliz.jpg", titulo: "Gato feliz" },
   sorpresa: { imagen: "/memes/gato-sorprendido.jpg", titulo: "Gato sorprendido" },
   lengua: { imagen: "/memes/gato-blep.jpg", titulo: "Gato blep" },
-  guino: { imagen: "/memes/gato-guino.jpg", titulo: "Gato guiñando" },
-  ojos_cerrados: { imagen: "/memes/gato-dormido.jpg", titulo: "Gato dormido" },
-  beso: { imagen: "/memes/gato-beso.jpg", titulo: "Gato besucón" },
-  enojado: { imagen: "/memes/gato-enojado.jpg", titulo: "Gato enojado" },
   triste: { imagen: "/memes/gato-triste.jpg", titulo: "Gato triste" },
   neutral: { imagen: "/memes/gato-neutral.jpg", titulo: "Gato serio" },
 };

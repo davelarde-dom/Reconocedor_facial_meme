@@ -3,20 +3,15 @@ import { NOMBRES_EXPRESION, REGLAS, type Expresion } from "../expresiones/expres
 
 // Gestos que usan las reglas de expresiones
 const GESTOS_USADOS = [
-  "mouthSmileLeft",
-  "mouthSmileRight",
+  "tongueOut",
   "jawOpen",
   "browInnerUp",
   "browOuterUpLeft",
   "browOuterUpRight",
-  "browDownLeft",
-  "browDownRight",
-  "eyeBlinkLeft",
-  "eyeBlinkRight",
-  "mouthPucker",
+  "eyeLookUpLeft",
+  "eyeLookUpRight",
   "mouthFrownLeft",
   "mouthFrownRight",
-  "tongueOut",
 ];
 
 interface Props {

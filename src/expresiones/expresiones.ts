@@ -1,29 +1,16 @@
 import type { Puntajes } from "../deteccion/detectorFacial";
 
-export type Expresion =
-  | "guino"
-  | "ojos_cerrados"
-  | "lengua"
-  | "sorpresa"
-  | "beso"
-  | "feliz"
-  | "enojado"
-  | "triste"
-  | "neutral";
+export type Expresion = "lengua" | "sorpresa" | "pensativo" | "triste" | "neutral";
 
 /**
  * Umbrales (0 a 1) para cada gesto. Si una expresión se detecta demasiado
  * fácil o casi nunca, ajusta aquí el número usando el panel de calibración.
  */
 export const UMBRALES = {
-  ojoCerrado: 0.5,
-  ojoAbierto: 0.3,
   lengua: 0.3,
   bocaAbierta: 0.45,
   cejasArriba: 0.35,
-  beso: 0.7,
-  sonrisa: 0.55,
-  cejasAbajo: 0.45,
+  mirarArriba: 0.4,
   tristeza: 0.3,
 };
 
@@ -39,28 +26,9 @@ const promedio = (p: Puntajes, izq: string, der: string) => (val(p, izq) + val(p
 
 /**
  * Reglas en orden de prioridad: gana la primera que se cumpla.
- * Los gestos más específicos (guiño, lengua) van antes que los generales.
+ * Los gestos más específicos (lengua) van antes que los generales.
  */
 export const REGLAS: Regla[] = [
-  {
-    expresion: "guino",
-    nombre: "Guiño",
-    instrucciones: "Cierra un solo ojo",
-    cumple: (p) => {
-      const izq = val(p, "eyeBlinkLeft");
-      const der = val(p, "eyeBlinkRight");
-      return (
-        (izq > UMBRALES.ojoCerrado && der < UMBRALES.ojoAbierto) ||
-        (der > UMBRALES.ojoCerrado && izq < UMBRALES.ojoAbierto)
-      );
-    },
-  },
-  {
-    expresion: "ojos_cerrados",
-    nombre: "Ojos cerrados",
-    instrucciones: "Cierra los dos ojos",
-    cumple: (p) => Math.min(val(p, "eyeBlinkLeft"), val(p, "eyeBlinkRight")) > UMBRALES.ojoCerrado,
-  },
   {
     expresion: "lengua",
     nombre: "Lengua afuera",
@@ -77,22 +45,10 @@ export const REGLAS: Regla[] = [
         UMBRALES.cejasArriba,
   },
   {
-    expresion: "beso",
-    nombre: "Beso",
-    instrucciones: "Haz trompita como para dar un beso",
-    cumple: (p) => val(p, "mouthPucker") > UMBRALES.beso,
-  },
-  {
-    expresion: "feliz",
-    nombre: "Feliz",
-    instrucciones: "Sonríe",
-    cumple: (p) => promedio(p, "mouthSmileLeft", "mouthSmileRight") > UMBRALES.sonrisa,
-  },
-  {
-    expresion: "enojado",
-    nombre: "Enojado",
-    instrucciones: "Frunce el ceño (baja las cejas)",
-    cumple: (p) => promedio(p, "browDownLeft", "browDownRight") > UMBRALES.cejasAbajo,
+    expresion: "pensativo",
+    nombre: "Pensativo",
+    instrucciones: "Mira hacia arriba, como pensando",
+    cumple: (p) => promedio(p, "eyeLookUpLeft", "eyeLookUpRight") > UMBRALES.mirarArriba,
   },
   {
     expresion: "triste",
