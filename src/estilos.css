@@ -1,0 +1,202 @@
+:root {
+  --fondo: #f6f4ef;
+  --superficie: #ffffff;
+  --texto: #1f1d1a;
+  --texto-suave: #6b665e;
+  --borde: #e2ddd3;
+  --acento: #e07a2e;
+  --error: #c0392b;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #161513;
+    --superficie: #22201d;
+    --texto: #f1ede6;
+    --texto-suave: #a39d93;
+    --borde: #3a3732;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+}
+
+button {
+  font: inherit;
+  padding: 0.6rem 1.1rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--acento);
+  color: #fff;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.inicio {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.inicio h1 {
+  font-size: 1.6rem;
+  margin: 0 0 1.25rem;
+}
+
+.escenario {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.camara,
+.visor-meme {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  margin: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+}
+
+.camara video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* efecto espejo */
+}
+
+.camara__cubierta {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.error {
+  color: var(--error);
+  margin: 0;
+}
+
+.visor-meme {
+  display: flex;
+  flex-direction: column;
+}
+
+.visor-meme img {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  object-fit: contain;
+}
+
+.visor-meme figcaption {
+  padding: 0.5rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.visor-meme--vacio,
+.visor-meme__falta {
+  align-items: center;
+  justify-content: center;
+  color: var(--texto-suave);
+  text-align: center;
+  padding: 1rem;
+}
+
+.visor-meme__falta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.controles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.panel-calibracion {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+}
+
+.panel-calibracion h2,
+.panel-calibracion h3 {
+  margin: 0 0 0.5rem;
+}
+
+.barras,
+.lista-expresiones {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.barras li {
+  display: grid;
+  grid-template-columns: 9.5rem 1fr 3rem;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  padding: 2px 0;
+}
+
+.barras__nombre {
+  font-family: ui-monospace, monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.barras__pista {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--borde);
+  overflow: hidden;
+}
+
+.barras__relleno {
+  display: block;
+  height: 100%;
+  background: var(--acento);
+}
+
+.barras__valor {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.lista-expresiones li {
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
+}
+
+.lista-expresiones li.activa {
+  background: var(--acento);
+  color: #fff;
+}
